@@ -7,19 +7,40 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02CEC11DC07A2B36CE8F7358 /* libPods-NejeEngraver.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7406B07435B4B64DBC4F9467 /* libPods-NejeEngraver.a */; };
 		A19CA6BE1DBBCFB000E5C568 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19CA6BD1DBBCFB000E5C568 /* AppDelegate.swift */; };
 		A19CA6C01DBBCFB000E5C568 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19CA6BF1DBBCFB000E5C568 /* ViewController.swift */; };
 		A19CA6C21DBBCFB000E5C568 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A19CA6C11DBBCFB000E5C568 /* Assets.xcassets */; };
 		A19CA6C51DBBCFB000E5C568 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A19CA6C31DBBCFB000E5C568 /* Main.storyboard */; };
+		A19CA6CD1DBBD02600E5C568 /* SerialHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19CA6CC1DBBD02600E5C568 /* SerialHandler.swift */; };
+		A19CA6D31DBC11A200E5C568 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19CA6D21DBC11A200E5C568 /* ImageView.swift */; };
+		A19CA6D51DBCB6E400E5C568 /* NSImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19CA6D41DBCB6E400E5C568 /* NSImageExtension.swift */; };
+		A19CA6D71DBCD3B600E5C568 /* NumberTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19CA6D61DBCD3B600E5C568 /* NumberTextField.swift */; };
+		A19CA6D91DBCE42C00E5C568 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19CA6D81DBCE42C00E5C568 /* Utils.swift */; };
+		A19CA6DB1DBCFD2900E5C568 /* PixelEditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19CA6DA1DBCFD2900E5C568 /* PixelEditingView.swift */; };
+		A19CA6DD1DBCFE5B00E5C568 /* EditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19CA6DC1DBCFE5B00E5C568 /* EditorViewController.swift */; };
+		A19CA6E01DBD408100E5C568 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19CA6DE1DBD408100E5C568 /* DataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0AAE25853925ABE2991B8421 /* Pods-NejeEngraver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NejeEngraver.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NejeEngraver/Pods-NejeEngraver.debug.xcconfig"; sourceTree = "<group>"; };
+		7406B07435B4B64DBC4F9467 /* libPods-NejeEngraver.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NejeEngraver.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		79228A1ED80ECFFBF6C13057 /* Pods-NejeEngraver.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NejeEngraver.release.xcconfig"; path = "Pods/Target Support Files/Pods-NejeEngraver/Pods-NejeEngraver.release.xcconfig"; sourceTree = "<group>"; };
 		A19CA6BA1DBBCFB000E5C568 /* NejeEngraver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NejeEngraver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A19CA6BD1DBBCFB000E5C568 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A19CA6BF1DBBCFB000E5C568 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A19CA6C11DBBCFB000E5C568 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A19CA6C41DBBCFB000E5C568 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A19CA6C61DBBCFB000E5C568 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A19CA6CC1DBBD02600E5C568 /* SerialHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SerialHandler.swift; sourceTree = "<group>"; };
+		A19CA6CE1DBBD06000E5C568 /* NejeEngraver-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NejeEngraver-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		A19CA6D21DBC11A200E5C568 /* ImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
+		A19CA6D41DBCB6E400E5C568 /* NSImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSImageExtension.swift; sourceTree = "<group>"; };
+		A19CA6D61DBCD3B600E5C568 /* NumberTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberTextField.swift; sourceTree = "<group>"; };
+		A19CA6D81DBCE42C00E5C568 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		A19CA6DA1DBCFD2900E5C568 /* PixelEditingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PixelEditingView.swift; sourceTree = "<group>"; };
+		A19CA6DC1DBCFE5B00E5C568 /* EditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditorViewController.swift; sourceTree = "<group>"; };
+		A19CA6DE1DBD408100E5C568 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,17 +48,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02CEC11DC07A2B36CE8F7358 /* libPods-NejeEngraver.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		808DB6E0413F5FB94D97C8CA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0AAE25853925ABE2991B8421 /* Pods-NejeEngraver.debug.xcconfig */,
+				79228A1ED80ECFFBF6C13057 /* Pods-NejeEngraver.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		A19CA6B11DBBCFB000E5C568 = {
 			isa = PBXGroup;
 			children = (
 				A19CA6BC1DBBCFB000E5C568 /* NejeEngraver */,
 				A19CA6BB1DBBCFB000E5C568 /* Products */,
+				808DB6E0413F5FB94D97C8CA /* Pods */,
+				E696C69F1B19225C9E8BBD7B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,11 +87,28 @@
 			children = (
 				A19CA6BD1DBBCFB000E5C568 /* AppDelegate.swift */,
 				A19CA6BF1DBBCFB000E5C568 /* ViewController.swift */,
+				A19CA6DE1DBD408100E5C568 /* DataManager.swift */,
+				A19CA6D21DBC11A200E5C568 /* ImageView.swift */,
+				A19CA6DC1DBCFE5B00E5C568 /* EditorViewController.swift */,
+				A19CA6DA1DBCFD2900E5C568 /* PixelEditingView.swift */,
+				A19CA6D41DBCB6E400E5C568 /* NSImageExtension.swift */,
+				A19CA6CC1DBBD02600E5C568 /* SerialHandler.swift */,
+				A19CA6D81DBCE42C00E5C568 /* Utils.swift */,
+				A19CA6D61DBCD3B600E5C568 /* NumberTextField.swift */,
 				A19CA6C11DBBCFB000E5C568 /* Assets.xcassets */,
 				A19CA6C31DBBCFB000E5C568 /* Main.storyboard */,
 				A19CA6C61DBBCFB000E5C568 /* Info.plist */,
+				A19CA6CE1DBBD06000E5C568 /* NejeEngraver-Bridging-Header.h */,
 			);
 			path = NejeEngraver;
+			sourceTree = "<group>";
+		};
+		E696C69F1B19225C9E8BBD7B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7406B07435B4B64DBC4F9467 /* libPods-NejeEngraver.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -68,9 +118,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A19CA6C91DBBCFB000E5C568 /* Build configuration list for PBXNativeTarget "NejeEngraver" */;
 			buildPhases = (
+				E17D94D97C2E2ED08B2C5B4C /* [CP] Check Pods Manifest.lock */,
 				A19CA6B61DBBCFB000E5C568 /* Sources */,
 				A19CA6B71DBBCFB000E5C568 /* Frameworks */,
 				A19CA6B81DBBCFB000E5C568 /* Resources */,
+				7ACC5FFABF7D5E83F21D1022 /* [CP] Embed Pods Frameworks */,
+				7356CE07768C789F7FC7C359 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -94,6 +147,7 @@
 					A19CA6B91DBBCFB000E5C568 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = A4ZM73UFF5;
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -128,13 +182,69 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		7356CE07768C789F7FC7C359 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NejeEngraver/Pods-NejeEngraver-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7ACC5FFABF7D5E83F21D1022 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NejeEngraver/Pods-NejeEngraver-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E17D94D97C2E2ED08B2C5B4C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A19CA6B61DBBCFB000E5C568 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A19CA6D31DBC11A200E5C568 /* ImageView.swift in Sources */,
+				A19CA6E01DBD408100E5C568 /* DataManager.swift in Sources */,
+				A19CA6DD1DBCFE5B00E5C568 /* EditorViewController.swift in Sources */,
 				A19CA6C01DBBCFB000E5C568 /* ViewController.swift in Sources */,
+				A19CA6DB1DBCFD2900E5C568 /* PixelEditingView.swift in Sources */,
+				A19CA6D71DBCD3B600E5C568 /* NumberTextField.swift in Sources */,
+				A19CA6D91DBCE42C00E5C568 /* Utils.swift in Sources */,
 				A19CA6BE1DBBCFB000E5C568 /* AppDelegate.swift in Sources */,
+				A19CA6D51DBCB6E400E5C568 /* NSImageExtension.swift in Sources */,
+				A19CA6CD1DBBD02600E5C568 /* SerialHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,6 +280,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -192,7 +303,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.12.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -219,6 +330,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -235,7 +347,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.12.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -244,28 +356,39 @@
 		};
 		A19CA6CA1DBBCFB000E5C568 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0AAE25853925ABE2991B8421 /* Pods-NejeEngraver.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = A4ZM73UFF5;
 				INFOPLIST_FILE = NejeEngraver/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.andyqua.NejeEngraver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "NejeEngraver-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		A19CA6CB1DBBCFB000E5C568 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 79228A1ED80ECFFBF6C13057 /* Pods-NejeEngraver.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = A4ZM73UFF5;
 				INFOPLIST_FILE = NejeEngraver/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.andyqua.NejeEngraver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "NejeEngraver-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -289,6 +412,7 @@
 				A19CA6CB1DBBCFB000E5C568 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
