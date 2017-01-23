@@ -15,6 +15,9 @@ So, with a combination of the supported Hex commands (found from https://github.
 It requires an OSX Serial USB driver - I used the one from here (working on OSX Sierra 10.12.1):  
 [https://github.com/adrianmihalko/ch340g-ch34g-ch34x-mac-os-x-driver](https://github.com/adrianmihalko/ch340g-ch34g-ch34x-mac-os-x-driver)
 
+## Install
+You can install using the latest release - https://github.com/AndyQ/NejeLaserEngraver/releases/latest<br>
+You can also compile from source (CocoaPods required).
 
 ## Usage:
 1. Launch app
