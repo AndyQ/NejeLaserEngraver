@@ -12,8 +12,9 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Insert code here to initialize your application
-
+        if #available(OSX 10.12.2, *) {
+            NSApplication.shared.isAutomaticCustomizeTouchBarMenuItemEnabled = true
+        }
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -27,9 +28,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBAction func testModeToggled(_ sender: Any) {
         if let menu = sender as? NSMenuItem {
-            menu.state = menu.state == 1 ? 0 : 1
+            menu.state = NSControl.StateValue(rawValue: menu.state.rawValue == 1 ? 0 : 1)
             
-            NotificationCenter.default.post(name: NSNotification.Name("TestMode"), object: nil, userInfo: ["on":menu.state == 1 ? true : false])
+            NotificationCenter.default.post(name: NSNotification.Name("TestMode"), object: nil, userInfo: ["on":menu.state.rawValue == 1 ? true : false])
         }
     }
 }

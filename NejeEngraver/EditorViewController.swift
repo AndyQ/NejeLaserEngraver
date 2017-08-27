@@ -24,17 +24,26 @@ class EditorViewController: NSViewController {
         scrollView.hasVerticalScroller = true
         scrollView.borderType = .grooveBorder
         scrollView.contentView.copiesOnScroll = false
-        
+        scrollView.contentView.postsBoundsChangedNotifications = true
+
         // Create our view
         let dm = DataManager.instance
         editorView = PixelEditingView(frame:NSRect(x:0, y:0, width:dm.imageSize*10, height:dm.imageSize*10))
         scrollView.documentView = editorView
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(EditorViewController.boundsDidChange(_:)), name: NSView.boundsDidChangeNotification, object: scrollView.contentView)
+
     }
     
     override func viewWillDisappear() {
         onClose?()
     }
-        
+    
+    @objc func boundsDidChange( _ notification : NSNotification ) {
+        print( "Change - \(scrollView.contentView.bounds)" )
+        scrollView.documentView?.setNeedsDisplay(scrollView.contentView.bounds)
+    }
+    
     override func mouseDown(with event: NSEvent) {
         let p = self.view.convert(event.locationInWindow, to: editorView)
         if p.x < 0 || p.y < 0 || p.x > editorView.frame.width || p.y > editorView.frame.height {

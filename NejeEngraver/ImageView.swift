@@ -9,14 +9,15 @@
 import Cocoa
 
 
+@available(OSX 10.13, *)
 class ImageView: NSView {
     
     var cellWidth : CGFloat = 4
     
     var dm = DataManager.instance
     
-    var acceptableTypes: Set<String> { return [NSURLPboardType,NSFilenamesPboardType] }
-    let filteringOptions = [NSPasteboardURLReadingContentsConformToTypesKey:NSImage.imageTypes()]
+    var acceptableTypes: [NSPasteboard.PasteboardType] = [NSPasteboard.PasteboardType.URL,NSPasteboard.PasteboardType.fileURL]
+    let filteringOptions = [NSPasteboard.ReadingOptionKey.urlReadingContentsConformToTypes:NSImage.imageTypes]
     
     
     var isReceivingDrag = false {
@@ -30,7 +31,7 @@ class ImageView: NSView {
         
         cellWidth = self.bounds.width / CGFloat(dm.imageSize)
         
-        register(forDraggedTypes: Array(acceptableTypes))
+        registerForDraggedTypes(acceptableTypes)
     }
     
     
@@ -95,7 +96,7 @@ class ImageView: NSView {
             path.stroke()
         }
         
-        if let ctx = NSGraphicsContext.current()?.cgContext{
+        if let ctx = NSGraphicsContext.current?.cgContext{
             // Drawing code here.
             for row in 0 ..< dm.imageSize {
                 for col in 0 ..< dm.imageSize {

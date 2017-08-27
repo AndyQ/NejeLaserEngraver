@@ -81,7 +81,7 @@ class PixelEditingView: NSView {
         }
 
         if cx != lastX || cy != lastY {
-            //  Swift.print( "Dragging at \(cx),\(cy)  lx-\(lastX), ly-\(lastY)")
+            print( "Dragging at \(cx),\(cy)  lx-\(lastX), ly-\(lastY)")
             let index = cx + (511-cy)*Int(gridWidth)
             
             dm.pixels[index] = adding
@@ -96,21 +96,18 @@ class PixelEditingView: NSView {
     
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
-        
 
         let visibleRect = self.frame.intersection(superview!.bounds)
-        // Swift.print( "VisibleRect - \(visibleRect)")
         
-        if let ctx = NSGraphicsContext.current()?.cgContext{
+        if let ctx = NSGraphicsContext.current?.cgContext{
             let cellW = cellWidth
+//            print( "VisibleRect - \(visibleRect)")
 
 
             let startX = Int(visibleRect.origin.x / cellWidth)
             let endX = Int((visibleRect.origin.x + visibleRect.size.width) / cellWidth) + 1
             let startY = Int(visibleRect.origin.y / cellWidth)
             let endY = Int((visibleRect.origin.y + visibleRect.size.height) / cellWidth) + 2
-            
-            
             
             for cx in startX ..< endX {
                 for cy in startY ..< endY {

@@ -15,16 +15,26 @@ func clamp( _ z: Int ) -> UInt8 {
 enum RenderingStyle {
     case FloydSteinbergDithering
     case AveragePixelSampling
+    case BlackAndWhite
 }
 
 
 extension NSImageRep {
     
     func binaryRepresentation( _ colorThreshold:Int, renderingStyle: RenderingStyle ) -> NSBitmapImageRep? {
-        guard let grayRep = self.greyRepresentation() else { return nil }
-    
-        let numberOfCols = grayRep.pixelsWide
-        let numberOfRows = grayRep.pixelsHigh
+
+        var rep : NSBitmapImageRep
+        
+        if renderingStyle == .AveragePixelSampling {
+            guard let grayRep = self.blackAndWhiteRepresentation() else { return nil }
+            rep = grayRep
+        } else {
+            guard let grayRep = self.greyRepresentation() else { return nil }
+            rep = grayRep
+        }
+        
+        let numberOfCols = rep.pixelsWide
+        let numberOfRows = rep.pixelsHigh
     
         let newRep = NSBitmapImageRep(bitmapDataPlanes: nil,
                                       pixelsWide: numberOfCols,
@@ -33,14 +43,14 @@ extension NSImageRep {
                                       samplesPerPixel: 1,
                                       hasAlpha: false,
                                       isPlanar: false,
-                                      colorSpaceName: NSCalibratedWhiteColorSpace,
+                                      colorSpaceName: NSColorSpaceName.calibratedWhite,
                                       bytesPerRow: 0,
                                       bitsPerPixel: 0)!
         
-        guard let bitmapDataSource = grayRep.bitmapData else { return nil }
+        guard let bitmapDataSource = rep.bitmapData else { return nil }
 
         // iterate over all pixels
-        let grayBPR = grayRep.bytesPerRow
+        let grayBPR = rep.bytesPerRow
         let pWide = newRep.pixelsWide
         
 
@@ -64,6 +74,17 @@ extension NSImageRep {
                     bitmapDataSource[col+1+nextRowData] = clamp( Int(bitmapDataSource[col+1+nextRowData]) + (error / 16))
                 }
             }
+        } else if renderingStyle == .AveragePixelSampling {
+            for row in 0 ..< numberOfRows {
+                for col in 0 ..< pWide {
+                    let gray = bitmapDataSource[col + row * grayBPR]
+                    if  gray > UInt8(colorThreshold) {
+                        bitmapDataSource[col + row * grayBPR] = 255
+                    } else {
+                        bitmapDataSource[col + row * grayBPR] = 0
+                    }
+                }
+            }
         } else {
             for row in 0 ..< numberOfRows {
                 for col in 0 ..< pWide {
@@ -80,8 +101,8 @@ extension NSImageRep {
         // Dummy files for testing conversion
         let file = URL( fileURLWithPath:Utils.cacheFolder() + "/black.png")
         print( "b&w file written to \(file)")
-        try? grayRep.representation(using: NSPNGFileType, properties: [:])?.write(to: file)
-        return grayRep
+        try? rep.representation(using: NSBitmapImageRep.FileType.png, properties: [:])?.write(to: file)
+        return rep
     }
     
     func greyRepresentation( ) -> NSBitmapImageRep? {
@@ -93,12 +114,12 @@ extension NSImageRep {
                                    samplesPerPixel: 1,
                                    hasAlpha: false,
                                    isPlanar: false,
-                                   colorSpaceName: NSCalibratedWhiteColorSpace,
+                                   colorSpaceName: NSColorSpaceName.calibratedWhite,
                                    bytesPerRow: 0, bitsPerPixel: 0)!
         
         NSGraphicsContext.saveGraphicsState()
         let ctx = NSGraphicsContext(bitmapImageRep: newRep)
-        NSGraphicsContext.setCurrent(ctx)
+        NSGraphicsContext.current = ctx
 
         self.draw(in: NSMakeRect(0, 0, CGFloat(newRep.pixelsWide), CGFloat(newRep.pixelsHigh)))
         
@@ -106,10 +127,38 @@ extension NSImageRep {
 
         let file = URL( fileURLWithPath:Utils.cacheFolder() + "/gray.png")
         print( "Greyfile written to \(file)")
-        try? newRep.representation(using: NSPNGFileType, properties: [:])?.write(to: file)
+        try? newRep.representation(using: NSBitmapImageRep.FileType.png, properties: [:])?.write(to: file)
 
         return newRep
     }
+    
+    func blackAndWhiteRepresentation( ) -> NSBitmapImageRep? {
+        
+        let newRep = NSBitmapImageRep(bitmapDataPlanes: nil,
+                                      pixelsWide: self.pixelsWide,
+                                      pixelsHigh: self.pixelsHigh,
+                                      bitsPerSample: 1,
+                                      samplesPerPixel: 1,
+                                      hasAlpha: false,
+                                      isPlanar: false,
+                                      colorSpaceName: NSColorSpaceName.calibratedWhite,
+                                      bytesPerRow: 0, bitsPerPixel: 0)!
+        
+        NSGraphicsContext.saveGraphicsState()
+        let ctx = NSGraphicsContext(bitmapImageRep: newRep)
+        NSGraphicsContext.current = ctx
+        
+        self.draw(in: NSMakeRect(0, 0, CGFloat(newRep.pixelsWide), CGFloat(newRep.pixelsHigh)))
+        
+        NSGraphicsContext.restoreGraphicsState()
+        
+        let file = URL( fileURLWithPath:Utils.cacheFolder() + "/blackwhite.png")
+        print( "Greyfile written to \(file)")
+        try? newRep.representation(using: NSBitmapImageRep.FileType.png, properties: [:])?.write(to: file)
+        
+        return newRep
+    }
+
 }
 
 extension NSImage {
@@ -157,12 +206,12 @@ extension NSImage {
                                    samplesPerPixel: 4,
                                    hasAlpha: true,
                                    isPlanar: false,
-                                   colorSpaceName: NSCalibratedRGBColorSpace,
+                                   colorSpaceName: NSColorSpaceName.calibratedRGB,
                                    bytesPerRow: 0, bitsPerPixel: 0)!
 
         NSGraphicsContext.saveGraphicsState()
         if let ctx = NSGraphicsContext(bitmapImageRep: rep) {
-            NSGraphicsContext.setCurrent(ctx)
+            NSGraphicsContext.current = ctx
             
             ctx.cgContext.setFillColor( NSColor.white.cgColor )
             ctx.cgContext.fill( CGRect(x: 0, y: 0, width: targetWidth, height: targetHeight))

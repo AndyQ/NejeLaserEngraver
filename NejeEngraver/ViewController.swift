@@ -8,6 +8,7 @@
 
 import Cocoa
 
+@available(OSX 10.13, *)
 class ViewController: NSViewController {
     
     @IBOutlet weak var burnTextFeld: NumberTextField!
@@ -41,7 +42,8 @@ class ViewController: NSViewController {
     @IBOutlet var grid : ImageView!
     
     @IBOutlet weak var barProgress: NSTextField!
-    @IBOutlet weak var barBarItem: NSCustomTouchBarItem!
+
+//    @IBOutlet weak var barBarItem: NSCustomTouchBarItem!
     
     var printTimer : Timer!
     
@@ -77,7 +79,7 @@ class ViewController: NSViewController {
             self?.serialPortReadData( data:data )
         }
         
-        serialHandler.imageUploadedCallback = { [weak self] (data) in
+        serialHandler.imageUploadedCallback = { [weak self] () in
             self?.enableButtons(enabled: true)
         }
         
@@ -102,7 +104,7 @@ class ViewController: NSViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.testModeToggled(_:)), name: Notification.Name("TestMode"), object: nil)
     }
     
-    func testModeToggled( _ notification : NSNotification ) {
+    @objc func testModeToggled( _ notification : NSNotification ) {
         if let on = notification.userInfo?["on"] as? Bool {
             serialHandler.testMode = on
             testModeLabel.isHidden = !on
@@ -148,6 +150,7 @@ class ViewController: NSViewController {
         if let vc = segue.destinationController as? EditorViewController {
             vc.onClose = { [weak self] () in
                 self?.grid.setNeedsDisplay(self!.grid.bounds)
+                self?.dm.dotsToImage()
                 self?.dm.saveImage()
             }
         }
@@ -159,13 +162,15 @@ class ViewController: NSViewController {
 
     @IBAction func imageProcessingSelected(_ sender: AnyObject) {
         guard let button = sender as? NSButton else { return }
-        if button.title == "Dithering" {
+        if button.title == "Black and White" {
+            dm.renderingStyle = .BlackAndWhite
+        } else if button.title == "Dithering" {
             dm.renderingStyle = .FloydSteinbergDithering
         } else {
             dm.renderingStyle = .AveragePixelSampling
         }
 
-        dm.imageToDots( colorThreshold:Float(imageDarknessThreshold.doubleValue) )
+        dm.convertImage( colorThreshold:Float(imageDarknessThreshold.doubleValue) )
         grid.setNeedsDisplay(grid.bounds)
     }
     
@@ -203,10 +208,14 @@ class ViewController: NSViewController {
         
         printTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block:{ [weak self] (timer) in
             guard let `self` = self else { return }
-            let now = CFAbsoluteTimeGetCurrent()
-            let timeTaken = self.secondsToHoursMinutesSeconds(Int(now - self.startPrintTime))
-            self.printTimeText.stringValue = "Print time: \(timeTaken)"
+            self.handleTimer()
         })
+    }
+    
+    @objc func handleTimer() {
+        let now = CFAbsoluteTimeGetCurrent()
+        let timeTaken = self.secondsToHoursMinutesSeconds(Int(now - self.startPrintTime))
+        self.printTimeText.stringValue = "Print time: \(timeTaken)"
     }
     
     @IBAction func pausePressed(_ sender: AnyObject) {
@@ -283,7 +292,7 @@ class ViewController: NSViewController {
     
     @IBAction func darknessThresholdChanged(_ sender: Any) {
         if let slider = sender as? NSSlider {
-            dm.imageToDots( colorThreshold:Float(slider.doubleValue) )
+            dm.convertImage( colorThreshold:Float(slider.doubleValue) )
             grid.setNeedsDisplay(grid.bounds)
             
             imageThresholdText.stringValue = "\(Int(slider.doubleValue))"

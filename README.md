@@ -12,7 +12,7 @@ So, with a combination of the supported Hex commands (found from https://github.
  - Real time progress preview of engraving image
 
 ## Requirements
-It requires an OSX Serial USB driver - I used the one from here (working on OSX Sierra 10.12.1):
+It requires an OSX Serial USB driver - I used the one from here (working on OSX Sierra 10.12.1):  
 [https://github.com/adrianmihalko/ch340g-ch34g-ch34x-mac-os-x-drive](https://github.com/adrianmihalko/ch340g-ch34g-ch34x-mac-os-x-drive)
 
 

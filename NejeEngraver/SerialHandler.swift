@@ -40,14 +40,14 @@ class SerialHandler : NSObject, ORSSerialPortDelegate {
     
     func findSerialDevices(deviceType: String,  serialPortIterator: inout io_iterator_t ) -> kern_return_t {
         var result: kern_return_t = KERN_FAILURE
-        let classesToMatch = IOServiceMatching(kIOSerialBSDServiceValue)
-        if var classesToMatchDict = (classesToMatch as! NSMutableDictionary) as NSDictionary as? [String: Any] {
-            classesToMatchDict[kIOSerialBSDTypeKey] = deviceType
-            let classesToMatchCFDictRef = (classesToMatchDict as NSDictionary) as CFDictionary
-            result = IOServiceGetMatchingServices(kIOMasterPortDefault, classesToMatchCFDictRef, &serialPortIterator);
-            return result
+        if let classesToMatch = IOServiceMatching(kIOSerialBSDServiceValue) {
+            if var classesToMatchDict = (classesToMatch as NSMutableDictionary) as NSDictionary as? [String: Any] {
+                classesToMatchDict[kIOSerialBSDTypeKey] = deviceType
+                let classesToMatchCFDictRef = (classesToMatchDict as NSDictionary) as CFDictionary
+                result = IOServiceGetMatchingServices(kIOMasterPortDefault, classesToMatchCFDictRef, &serialPortIterator);
+                return result
+            }
         }
-        
         return KERN_FAILURE
     }
     

@@ -14,7 +14,7 @@ class DataManager {
     var pixels : [CellState]!
     var imageSize = 512
 
-    var renderingStyle : RenderingStyle = .FloydSteinbergDithering
+    var renderingStyle : RenderingStyle = .AveragePixelSampling
     
     static let instance = DataManager ()
 
@@ -27,7 +27,7 @@ class DataManager {
         
         if !loadImage( fromUrl:imageCacheURL) {
             self.image = NSImage(size: NSSize(width: imageSize, height: imageSize))
-        }        
+        }
     }
 
     func clearImage() {
@@ -49,7 +49,6 @@ class DataManager {
     }
 
     func loadImage( fromUrl url: URL ) -> Bool {
-        var ret = false
         
         // Read in image
         if let i = NSImage(contentsOf: url) {
@@ -60,19 +59,62 @@ class DataManager {
                 image = image.resizeImage(imageSize, imageSize)
             }
             
-            
-            imageToDots( colorThreshold:127 )
-            
-            _ = Utils.createMonoBitmap(pixels: pixels)
-            ret = true
-            
-            saveImage()
+            convertImage( colorThreshold:127)
+            return true
         }
-        
-        return ret
+        return false
     }
     
-    func imageToDots( colorThreshold:Float ) {
+    func convertImage(colorThreshold:Float) {
+        if renderingStyle == .FloydSteinbergDithering {
+            imageToDots2(colorThreshold:colorThreshold)
+        } else {
+            imageToDots(colorThreshold:CGFloat(colorThreshold/255.0))
+        }
+        _ = Utils.createMonoBitmap(pixels: pixels)
+        
+        saveImage()
+    }
+    
+    func imageToDots( colorThreshold:CGFloat ) {
+        if let tiff = image.tiffRepresentation,
+            let imageRep = NSBitmapImageRep(data: tiff) {
+            let imageWidth = Int(image.size.width)
+            let imageHeight = Int(image.size.height)
+            
+            for y in  0 ..< imageHeight {
+                for x in 0 ..< imageWidth {
+                    pixels[x + y*imageWidth] = .off
+                    if let color = imageRep.colorAt(x: x, y: y) {
+                        if color.redComponent < colorThreshold && color.alphaComponent == 1 {
+                            pixels[x + y*imageWidth] = .on
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func dotsToImage() {
+        
+        let imageWidth = 512
+        let imageHeight = 512
+        if let imageRep = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: 512, pixelsHigh: 512, bitsPerSample: 16, samplesPerPixel: 4, hasAlpha: true, isPlanar: false, colorSpaceName: .calibratedRGB, bytesPerRow: 0, bitsPerPixel: 0) {
+            
+            for y in  0 ..< imageHeight {
+                for x in 0 ..< imageWidth {
+                    if let color = (pixels[x + y*imageWidth] == .off ? NSColor.white : NSColor.black).usingColorSpaceName(.calibratedRGB) {
+                        imageRep.setColor(color, atX: x, y: y)
+                    }
+                }
+            }
+            
+            image = NSImage(size: CGSize(width:imageWidth, height:imageHeight))
+            image.addRepresentation(imageRep)
+        }
+    }
+    
+    func imageToDots2( colorThreshold:Float ) {
         
         var tmpImage : NSImage = image 
         if let imageRep = image.representations[0].binaryRepresentation(Int(colorThreshold), renderingStyle:renderingStyle) {
